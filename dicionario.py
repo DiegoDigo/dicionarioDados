@@ -3,7 +3,8 @@
 # CREATION DATE 07/04/2017
 
 from __future__ import unicode_literals
-import re
+
+variaveis = []
 
 nome_programa = input("nome programa ")
 
@@ -13,4 +14,10 @@ with open(caminho, "r") as arq:
     for linha in arq.readlines():
         if linha.__contains__("PIC"):
             if linha.rsplit()[0] != "PIC":
-                print(linha)
+                variaveis.append(linha.rsplit()[1])
+    arq.close()
+
+with open("variaveis.xlsx", "a+") as arq:
+    for v in variaveis:
+        arq.writelines(v+"\n")
+    arq.close()
