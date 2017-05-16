@@ -2,3 +2,5 @@
 .~lock.variaveis.xlsx#
 variaveis.txt
 variaveis.xlsx
+__pycache__/
+dicionario.db
