@@ -25,17 +25,21 @@ nome_programa = input("nome programa ")
 
 caminho = "F:\PRGNEW\%s\BOK\%s" % (nome_programa[0:2], nome_programa + ".EFDE")
 
-arq = open(caminho, "rb")
-for linha in arq.readlines():
-    linha = str(linha)
-    if linha.__contains__("PIC") and not linha.__contains__("REDEFINES") \
-            and not linha.__contains__("===>") and not linha.__contains__("FILLER"):
-        if linha.rsplit()[0] != "PIC" and len(linha.rsplit()) >= 5:
-            variavel = linha.rsplit()[2].replace("'", "")
-            tamanho = linha.rsplit()[4][2:5]
-            if linha.rsplit()[4][0] == "X" or linha.rsplit()[4][0] == "x":
-                tipo = "Alfanumerico"
-            else:
-                tipo = "Numerico"
-        dicionario.create(variavel=variavel, tamanho=tamanho, tipo=tipo, descricao=descricao)
-arq.close()
+try:
+    arq = open(caminho, "rb")
+    for linha in arq.readlines():
+        linha = str(linha)
+        if linha.__contains__("PIC") and not linha.__contains__("REDEFINES") \
+                and not linha.__contains__("===>") and not linha.__contains__("FILLER"):
+            if linha.rsplit()[0] != "PIC" and len(linha.rsplit()) >= 5:
+                variavel = linha.rsplit()[2].replace("'", "")
+                tamanho = linha.rsplit()[4][2:5]
+                if linha.rsplit()[4][0] == "X" or linha.rsplit()[4][0] == "x":
+                    tipo = "Alfanumerico"
+                else:
+                    tipo = "Numerico"
+            dicionario.create(variavel=variavel, tamanho=tamanho, tipo=tipo, descricao=descricao)
+    arq.close()
+    print("Arquivo gravado com sucesso")
+except IOError:
+    print("Arquivo em usu")
